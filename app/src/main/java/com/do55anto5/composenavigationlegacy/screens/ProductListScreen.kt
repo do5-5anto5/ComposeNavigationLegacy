@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,13 +17,17 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun ProductListScreen(
-    modifier: Modifier = Modifier
+    navigateToProductDetailsScreen: () -> Unit
 ) {
-    ProductListContent()
+    ProductListContent(
+        navigateToProductDetailsScreen = navigateToProductDetailsScreen
+    )
 }
 
 @Composable
-fun ProductListContent(modifier: Modifier = Modifier) {
+fun ProductListContent(
+    navigateToProductDetailsScreen: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -32,6 +37,11 @@ fun ProductListContent(modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally,
         content = {
             Text(text = "Product List Screen")
+            Button(onClick = navigateToProductDetailsScreen,
+                content = {
+                    Text(text = "Go to Product List Screen")
+                }
+            )
         }
     )
 }
@@ -45,6 +55,8 @@ private fun ListProductPreview() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        ProductListContent()
+        ProductListContent(
+            navigateToProductDetailsScreen = {}
+        )
     }
 }
