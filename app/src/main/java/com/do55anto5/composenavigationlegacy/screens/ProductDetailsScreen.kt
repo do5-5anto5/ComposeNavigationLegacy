@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 fun ProductDetailsScreen(
     modifier: Modifier = Modifier
 ) {
-
+    ProductDetailsContent()
 }
 
 @Composable
