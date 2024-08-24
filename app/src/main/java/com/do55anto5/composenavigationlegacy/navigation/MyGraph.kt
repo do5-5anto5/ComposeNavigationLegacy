@@ -13,11 +13,19 @@ fun SetupNavHost(navController: NavHostController) {
     NavHost(navController = navController, startDestination = "home_screen") {
 
         composable(route = "home_screen") {
-            HomeScreen()
+            HomeScreen(
+                navigateToProductListScreen = {
+                    navController.navigate("product_list_screen")
+                }
+            )
         }
 
         composable(route = "product_list_screen") {
-            ProductListScreen()
+            ProductListScreen(
+                navigateToProductDetailsScreen = {
+                    navController.navigate("product_details_screen")
+                }
+            )
         }
 
         composable(route = "product_details_screen") {
