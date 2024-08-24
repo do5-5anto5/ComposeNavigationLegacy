@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,14 +17,16 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun HomeScreen(
-    modifier: Modifier = Modifier
+    navigateToProductListScreen: () -> Unit
 ) {
-    HomeContent()
+    HomeContent(
+        navigateToProductListScreen = navigateToProductListScreen
+    )
 }
 
 @Composable
 fun HomeContent(
-    modifier: Modifier = Modifier
+    navigateToProductListScreen: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -34,6 +37,11 @@ fun HomeContent(
         horizontalAlignment = Alignment.CenterHorizontally,
         content = {
             Text(text = "Home Screen")
+            Button(onClick = navigateToProductListScreen,
+                content = {
+                    Text(text = "Go to Product List Screen")
+                }
+            )
         }
     )
 }
@@ -41,5 +49,7 @@ fun HomeContent(
 @Preview(showBackground = true)
 @Composable
 private fun HomePreview() {
-        HomeContent()
+        HomeContent(
+            navigateToProductListScreen = {}
+        )
 }
