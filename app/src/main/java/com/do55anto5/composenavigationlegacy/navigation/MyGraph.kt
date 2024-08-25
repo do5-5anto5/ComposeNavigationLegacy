@@ -24,12 +24,19 @@ fun SetupNavHost(navController: NavHostController) {
             ProductListScreen(
                 navigateToProductDetailsScreen = {
                     navController.navigate("product_details_screen")
+                },
+                navigateBack = {
+                    navController.popBackStack()
                 }
             )
         }
 
         composable(route = "product_details_screen") {
-            ProductDetailsScreen()
+            ProductDetailsScreen(
+                navigateBack = {
+                    navController.popBackStack()
+                }
+            )
         }
     }
 }
