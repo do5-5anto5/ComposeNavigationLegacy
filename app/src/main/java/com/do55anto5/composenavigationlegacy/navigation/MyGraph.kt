@@ -20,20 +20,25 @@ fun SetupNavHost(navController: NavHostController) {
         composable(route = "home_screen") {
             HomeScreen(
                 navigateToProductListScreen = { user ->
-                    navController.navigate("product_list_screen/${user.toJson()}")
+                    navController.navigate("product_list_screen/${user?.toJson()}")
                 }
             )
         }
 
         composable(
             route = "product_list_screen/{user}",
-            arguments = listOf(navArgument("user") { type = NavType.StringType })
-            ) { navBackStackEntry ->
+            arguments = listOf(navArgument("user") {
+                type = NavType.StringType
+                nullable = true
+            })
+        ) { navBackStackEntry ->
 
             val user = navBackStackEntry.arguments?.getString("user")?.fromJson<User>()
+            val userDefault = User(name = "Guest", age = 0)
 
             ProductListScreen(
-                user = user,
+                // set default value
+                user = user ?: userDefault,
                 navigateToProductDetailsScreen = {
                     navController.navigate("product_details_screen")
                 },
