@@ -6,9 +6,12 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.do55anto5.composenavigationlegacy.model.User
 import com.do55anto5.composenavigationlegacy.screens.HomeScreen
 import com.do55anto5.composenavigationlegacy.screens.ProductDetailsScreen
 import com.do55anto5.composenavigationlegacy.screens.ProductListScreen
+import com.do55anto5.composenavigationlegacy.util.fromJson
+import com.do55anto5.composenavigationlegacy.util.toJson
 
 @Composable
 fun SetupNavHost(navController: NavHostController) {
@@ -16,21 +19,21 @@ fun SetupNavHost(navController: NavHostController) {
 
         composable(route = "home_screen") {
             HomeScreen(
-                navigateToProductListScreen = { name ->
-                    navController.navigate("product_list_screen/$name")
+                navigateToProductListScreen = { user ->
+                    navController.navigate("product_list_screen/${user.toJson()}")
                 }
             )
         }
 
         composable(
-            route = "product_list_screen/{name}",
-            arguments = listOf(navArgument("name") { type = NavType.StringType })
+            route = "product_list_screen/{user}",
+            arguments = listOf(navArgument("user") { type = NavType.StringType })
             ) { navBackStackEntry ->
 
-            val name = navBackStackEntry.arguments?.getString("name") ?: ""
+            val user = navBackStackEntry.arguments?.getString("user")?.fromJson<User>()
 
             ProductListScreen(
-                name = name,
+                user = user,
                 navigateToProductDetailsScreen = {
                     navController.navigate("product_details_screen")
                 },
