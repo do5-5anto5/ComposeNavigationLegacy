@@ -18,12 +18,12 @@ import com.do55anto5.composenavigationlegacy.model.User
 
 @Composable
 fun ProductListScreen(
-    user: User?,
+    name: String?,
     navigateToProductDetailsScreen: () -> Unit,
     navigateBack: () -> Unit
 ) {
     ProductListContent(
-        user = user,
+        name = name,
         navigateToProductDetailsScreen = navigateToProductDetailsScreen,
         navigateBack = navigateBack
     )
@@ -31,7 +31,7 @@ fun ProductListScreen(
 
 @Composable
 fun ProductListContent(
-    user: User?,
+    name: String?,
     navigateToProductDetailsScreen: () -> Unit,
     navigateBack: () -> Unit = {}
 ) {
@@ -44,7 +44,7 @@ fun ProductListContent(
         horizontalAlignment = Alignment.CenterHorizontally,
         content = {
             Text(text = "Product List Screen")
-            Text(text = "Name: ${user?.name} / Age: ${user?.age}")
+            Text(text = "Name: $name")
             Button(onClick = navigateToProductDetailsScreen,
                 content = {
                     Text(text = "Go to Product Details Screen")
@@ -69,7 +69,7 @@ private fun ListProductPreview() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         ProductListContent(
-            user = User("", 10),
+            name = "John Doe",
             navigateToProductDetailsScreen = {},
             navigateBack = {}
         )
