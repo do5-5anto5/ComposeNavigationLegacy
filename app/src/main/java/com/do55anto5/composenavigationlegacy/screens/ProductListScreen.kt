@@ -14,16 +14,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.do55anto5.composenavigationlegacy.model.User
 
 @Composable
 fun ProductListScreen(
     name: String?,
+    result: String?,
     navigateToProductDetailsScreen: () -> Unit,
     navigateBack: () -> Unit
 ) {
     ProductListContent(
         name = name,
+        result = result,
         navigateToProductDetailsScreen = navigateToProductDetailsScreen,
         navigateBack = navigateBack
     )
@@ -32,6 +33,7 @@ fun ProductListScreen(
 @Composable
 fun ProductListContent(
     name: String?,
+    result: String?,
     navigateToProductDetailsScreen: () -> Unit,
     navigateBack: () -> Unit = {}
 ) {
@@ -44,7 +46,11 @@ fun ProductListContent(
         horizontalAlignment = Alignment.CenterHorizontally,
         content = {
             Text(text = "Product List Screen")
+
             Text(text = "Name: $name")
+
+            Text(text = "Result: $result")
+
             Button(onClick = navigateToProductDetailsScreen,
                 content = {
                     Text(text = "Go to Product Details Screen")
@@ -70,6 +76,7 @@ private fun ListProductPreview() {
     ) {
         ProductListContent(
             name = "John Doe",
+            result = "Jetpack Compose Navigation",
             navigateToProductDetailsScreen = {},
             navigateBack = {}
         )
