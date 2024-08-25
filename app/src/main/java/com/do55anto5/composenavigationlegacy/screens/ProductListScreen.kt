@@ -14,15 +14,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.do55anto5.composenavigationlegacy.model.User
 
 @Composable
 fun ProductListScreen(
-    name: String,
+    user: User?,
     navigateToProductDetailsScreen: () -> Unit,
     navigateBack: () -> Unit
 ) {
     ProductListContent(
-        name = name,
+        user = user,
         navigateToProductDetailsScreen = navigateToProductDetailsScreen,
         navigateBack = navigateBack
     )
@@ -30,7 +31,7 @@ fun ProductListScreen(
 
 @Composable
 fun ProductListContent(
-    name: String,
+    user: User?,
     navigateToProductDetailsScreen: () -> Unit,
     navigateBack: () -> Unit = {}
 ) {
@@ -43,7 +44,7 @@ fun ProductListContent(
         horizontalAlignment = Alignment.CenterHorizontally,
         content = {
             Text(text = "Product List Screen")
-            Text(text = "Argument: $name")
+            Text(text = "Name: ${user?.name} / Age: ${user?.age}")
             Button(onClick = navigateToProductDetailsScreen,
                 content = {
                     Text(text = "Go to Product Details Screen")
@@ -68,7 +69,7 @@ private fun ListProductPreview() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         ProductListContent(
-            name = "Product",
+            user = User("", 10),
             navigateToProductDetailsScreen = {},
             navigateBack = {}
         )
