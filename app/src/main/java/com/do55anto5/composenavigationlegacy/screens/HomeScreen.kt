@@ -25,7 +25,7 @@ import com.do55anto5.composenavigationlegacy.model.User
 
 @Composable
 fun HomeScreen(
-    navigateToProductListScreen: (User?) -> Unit
+    navigateToProductListScreen: (String?) -> Unit
 ) {
     HomeContent(
         navigateToProductListScreen = navigateToProductListScreen
@@ -34,7 +34,7 @@ fun HomeScreen(
 
 @Composable
 fun HomeContent(
-    navigateToProductListScreen: (User?) -> Unit
+    navigateToProductListScreen: (String?) -> Unit
 ) {
 
     val context = LocalContext.current
@@ -55,7 +55,9 @@ fun HomeContent(
 
             val user = User(name = nameValue, age = 10)
             Button(
-                onClick = { navigateToProductListScreen(null) },
+                onClick = {
+                    navigateToProductListScreen( nameValue.ifEmpty { null })
+                },
                 content = {
                     Text(text = "Go to Product List Screen")
                 }
