@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,14 +17,16 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun ProductDetailsScreen(
-    modifier: Modifier = Modifier
+    navigateBack: () -> Unit
 ) {
-    ProductDetailsContent()
+    ProductDetailsContent(
+        navigateBack = navigateBack
+    )
 }
 
 @Composable
-fun ProductDetailsContent(
-    modifier: Modifier = Modifier
+fun     ProductDetailsContent(
+    navigateBack: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -34,6 +37,12 @@ fun ProductDetailsContent(
         horizontalAlignment = Alignment.CenterHorizontally,
         content = {
             Text(text = "Product Details Screen")
+            Button(
+                onClick = navigateBack,
+                content = {
+                    Text(text = "Go back")
+                }
+            )
         }
     )
 }
@@ -47,6 +56,6 @@ private fun ProductDetailsScreenPreview() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        ProductDetailsContent()
+        ProductDetailsContent(navigateBack = {})
     }
 }
