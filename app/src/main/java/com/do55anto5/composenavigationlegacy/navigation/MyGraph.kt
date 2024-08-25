@@ -32,10 +32,12 @@ fun SetupNavHost(navController: NavHostController) {
 
             val name = navBackStackEntry.arguments?.getString("name")
             val nameDefault = "Guest"
+            val result = navBackStackEntry.savedStateHandle.get<String>("result_value")
 
             ProductListScreen(
                 // set default value
                 name = name ?: nameDefault,
+                result = result,
                 navigateToProductDetailsScreen = {
                     navController.navigate("product_details_screen")
                 },
@@ -47,7 +49,10 @@ fun SetupNavHost(navController: NavHostController) {
 
         composable(route = "product_details_screen") {
             ProductDetailsScreen(
-                navigateBack = {
+                navigateBack = { result ->
+                    navController.previousBackStackEntry
+                        ?.savedStateHandle
+                        ?.set("result_value", result)
                     navController.popBackStack()
                 }
             )
