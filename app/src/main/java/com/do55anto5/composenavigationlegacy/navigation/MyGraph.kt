@@ -16,8 +16,8 @@ fun SetupNavHost(navController: NavHostController) {
 
         composable(route = "home_screen") {
             HomeScreen(
-                navigateToProductListScreen = { name ->
-                    navController.navigate("product_list_screen/$name")
+                navigateToProductListScreen = { user ->
+                    navController.navigate("product_list_screen/$user")
                 }
             )
         }

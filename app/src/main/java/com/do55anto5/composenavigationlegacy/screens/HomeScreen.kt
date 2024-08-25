@@ -21,10 +21,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.do55anto5.composenavigationlegacy.model.User
 
 @Composable
 fun HomeScreen(
-    navigateToProductListScreen: (String) -> Unit
+    navigateToProductListScreen: (User) -> Unit
 ) {
     HomeContent(
         navigateToProductListScreen = navigateToProductListScreen
@@ -33,7 +34,7 @@ fun HomeScreen(
 
 @Composable
 fun HomeContent(
-    navigateToProductListScreen: (String) -> Unit
+    navigateToProductListScreen: (User) -> Unit
 ) {
 
     val context = LocalContext.current
@@ -49,9 +50,12 @@ fun HomeContent(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         content = {
+
             Text(text = "Home Screen")
+
+            val user = User(name = nameValue, age = 10)
             Button(
-                onClick = { navigateToProductListScreen(nameValue) },
+                onClick = { navigateToProductListScreen(user) },
                 content = {
                     Text(text = "Go to Product List Screen")
                 }
