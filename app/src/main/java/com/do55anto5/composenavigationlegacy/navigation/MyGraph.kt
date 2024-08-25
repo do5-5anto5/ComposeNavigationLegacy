@@ -2,8 +2,10 @@ package com.do55anto5.composenavigationlegacy.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.do55anto5.composenavigationlegacy.screens.HomeScreen
 import com.do55anto5.composenavigationlegacy.screens.ProductDetailsScreen
 import com.do55anto5.composenavigationlegacy.screens.ProductListScreen
@@ -14,14 +16,21 @@ fun SetupNavHost(navController: NavHostController) {
 
         composable(route = "home_screen") {
             HomeScreen(
-                navigateToProductListScreen = {
-                    navController.navigate("product_list_screen")
+                navigateToProductListScreen = { name ->
+                    navController.navigate("product_list_screen/$name")
                 }
             )
         }
 
-        composable(route = "product_list_screen") {
+        composable(
+            route = "product_list_screen/{name}",
+            arguments = listOf(navArgument("name") { type = NavType.StringType })
+            ) { navBackStackEntry ->
+
+            val name = navBackStackEntry.arguments?.getString("name") ?: ""
+
             ProductListScreen(
+                name = name,
                 navigateToProductDetailsScreen = {
                     navController.navigate("product_details_screen")
                 },

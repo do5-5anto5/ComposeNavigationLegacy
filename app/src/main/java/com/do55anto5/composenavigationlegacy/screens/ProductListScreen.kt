@@ -17,10 +17,12 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun ProductListScreen(
+    name: String,
     navigateToProductDetailsScreen: () -> Unit,
     navigateBack: () -> Unit
 ) {
     ProductListContent(
+        name = name,
         navigateToProductDetailsScreen = navigateToProductDetailsScreen,
         navigateBack = navigateBack
     )
@@ -28,6 +30,7 @@ fun ProductListScreen(
 
 @Composable
 fun ProductListContent(
+    name: String,
     navigateToProductDetailsScreen: () -> Unit,
     navigateBack: () -> Unit = {}
 ) {
@@ -40,6 +43,7 @@ fun ProductListContent(
         horizontalAlignment = Alignment.CenterHorizontally,
         content = {
             Text(text = "Product List Screen")
+            Text(text = "Argument: $name")
             Button(onClick = navigateToProductDetailsScreen,
                 content = {
                     Text(text = "Go to Product Details Screen")
@@ -64,6 +68,7 @@ private fun ListProductPreview() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         ProductListContent(
+            name = "Product",
             navigateToProductDetailsScreen = {},
             navigateBack = {}
         )
